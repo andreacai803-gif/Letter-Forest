@@ -1,47 +1,118 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Letter Forest</title>
+  <title>Letter Forest logo</title>
   <meta http-equiv="refresh" content="0; url=https://www.figma.com/proto/p03BIZxbyODzCVBvdoyWaC/Letter-Forest?node-id=6-2&p=f&viewport=333%2C108%2C0.31&t=ehdUkJepZGyzc1AH-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --leaf: #3D5428;
+      --trunk: #614C38;
+      --cream: #FAF1E8;
+      --dot: #FFF8EC;
+    }
+ 
     body {
       margin: 0;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #F3E9D5;
-      color: #234D36;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 24px;
-      box-sizing: border-box;
+      display: grid;
+      place-items: center;
+      background: var(--cream);
     }
-
-    h1 {
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      margin-bottom: 8px;
+ 
+    /* One unit scales the whole logo; it shrinks on small screens */
+    .logo {
+      --s: min(1px, 0.128vw);
+      position: relative;
+      width: calc(var(--s) * 695);
+      height: calc(var(--s) * 502);
     }
-
-    p {
-      max-width: 450px;
-      line-height: 1.6;
+ 
+    .canopy {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: calc(var(--s) * 306);
+      height: calc(var(--s) * 306);
+      border-radius: 50%;
+      background: var(--leaf);
+      z-index: 2;
+    }
+ 
+    /* Braille "dots" inside the canopy */
+    .braille {
+      position: absolute;
+      left: calc(var(--s) * 94);
+      top: calc(var(--s) * 77);
+      display: grid;
+      grid-template-columns: repeat(2, calc(var(--s) * 42));
+      column-gap: calc(var(--s) * 35);
+      row-gap: calc(var(--s) * 11);
+    }
+ 
+    .braille span {
+      width: calc(var(--s) * 42);
+      height: calc(var(--s) * 42);
+      border-radius: 50%;
+      background: var(--dot);
+    }
+ 
+    .braille span:nth-child(even) {
+      opacity: 0.45;
+    }
+ 
+    .trunk {
+      position: absolute;
+      left: calc(var(--s) * 107);
+      top: calc(var(--s) * 290);
+      width: calc(var(--s) * 94);
+      height: calc(var(--s) * 154);
+      background: var(--trunk);
+      z-index: 1;
+    }
+ 
+    .wordmark {
+      position: absolute;
+      left: calc(var(--s) * 213);
+      top: calc(var(--s) * 368);
+      margin: 0;
+      font-family: "Fredoka", "Arial Rounded MT Bold", sans-serif;
+      font-weight: 600;
+      font-size: calc(var(--s) * 80);
+      line-height: 1;
+      color: var(--leaf);
+      white-space: nowrap;
+    }
+ 
+    .credit {
+      position: absolute;
+      left: calc(var(--s) * 107);
+      top: calc(var(--s) * 449);
+      margin: 0;
+      font-family: "Nunito", Arial, sans-serif;
+      font-weight: 500;
+      font-size: calc(var(--s) * 24);
+      line-height: 1.2;
+      color: var(--leaf);
     }
   </style>
 </head>
 <body>
-  <h1>🌳 Letter Forest</h1>
-  <h2>Explore · Learn · Grow</h2>
-  <p>
-    Welcome to Letter Forest!
-    An interactive learning adventure where
-    children discover letters and Braille
-    through touch, sound and play.
-  </p>
-  <p>Our forest is growing. Come explore soon!</p>
+  <div class="logo" role="img" aria-label="Letter Forest logo: a tree whose leaves are Braille dots">
+    <div class="trunk"></div>
+    <div class="canopy">
+      <div class="braille" aria-hidden="true">
+        <span></span><span></span>
+        <span></span><span></span>
+        <span></span><span></span>
+      </div>
+    </div>
+    <h1 class="wordmark">LetterForest</h1>
+    <p class="credit">Designed by Andrea Cai<br>for MADA Now 2026</p>
+  </div>
 </body>
 </html>
